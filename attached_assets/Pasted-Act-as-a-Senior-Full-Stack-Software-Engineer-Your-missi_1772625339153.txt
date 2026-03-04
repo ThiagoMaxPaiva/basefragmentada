@@ -1,0 +1,39 @@
+Act as a Senior Full Stack Software Engineer. Your mission is to initialize and code a complete mock exam system focused on preparing for the EAGS SIN (Air Force Sergeant - Information Systems Specialty) exam. The project must be scalable, modular, and follow Clean Code best practices.
+
+1. Required Architecture and File Structure:
+
+Create a Node.js project with the following strict file separation:
+
+public/index.html: Semantic structure of the user interface (SPA - Single Page Application).
+
+public/style.css: Complete styling. Clean, responsive (Mobile-First) design system with a military theme (FAB navy blue tones, gray, white, and light blue details). Native support for Dark Mode.
+
+public/script.js: Frontend logic. DOM manipulation, mock exam state control, timer, and communication with backend APIs.
+
+server.js: Backend server in Express.js. Responsible for serving static files, managing API routes, and authentication.
+
+database.js: Database configuration (I recommend SQLite for this initial setup in Replit). It should contain the following tables: users (id, email, password_hash, name, patent), progress (user_id, total_questions, correct_answers, wrong_answers), and questions (id, subject, topic, question_text, options, correct_option, explanation).
+
+ai_service.js: Exclusive module for AI integration. This file will contain functions prepared to receive a prompt from the student or a question they answered incorrectly, and generate detailed explanations or new dynamic questions.
+
+2. Business Rules and Core Functionalities:
+
+Authentication System (Login/Registration): The user can only access the dashboard and simulations after creating an account and logging in. Progress should be saved in the database and linked to the student's profile.
+
+Student Dashboard: A home screen after login that displays performance graphs (percentage of correct answers in 'Portuguese' and 'Specialized IT Knowledge'), mock exam history, and your current 'Rank' (gamification system based on correct answers: Civilian, Recruit, Student, Third Sergeant, etc.).
+
+Mock Exam Engine: Two main modes:
+
+Mock Exam Mode: Running time with a countdown timer, without immediate feedback. The result and answer key only appear at the end.
+
+Training Mode: Instant feedback after each answer (Correct/Incorrect), revealing the technical explanation of the question.
+
+Smart Filter: The database should allow filtering questions by the exact topics of the syllabus (e.g., Software Engineering, Computer Networks, Databases, Operating Systems, Portuguese).
+
+3. AI Integration (ai_service.js):
+
+Prepare the structure (endpoints in Express and calls in the Frontend) for a button called 'AI Explanation'. When a student gets a difficult question wrong, they click this button and the system makes a request to this module, which will simulate sending the question to an external API (you can leave it mocked for now) returning a didactic explanation.
+
+4. Execution Instructions:
+
+Start by creating the folder structure and initializing package.json. Then, provide the complete and functional code for server.js and the database.js configuration. Build file by file to ensure there is no code cut.
