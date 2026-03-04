@@ -4,7 +4,7 @@ import { useExamHistory } from "@/hooks/use-exams";
 import { AppLayout } from "@/components/layout/app-layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Activity, Target, ShieldCheck, Crosshair, Award, Clock } from "lucide-react";
+import { Activity, Target, ShieldCheck, Crosshair, Award, Clock, History } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import { Link } from "wouter";
 import { format } from "date-fns";
