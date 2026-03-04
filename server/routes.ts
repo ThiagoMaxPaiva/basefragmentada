@@ -65,7 +65,7 @@ export async function registerRoutes(
       const input = api.auth.register.input.parse(req.body);
       const existing = await storage.getUserByEmail(input.email);
       if (existing) {
-        return res.status(400).json({ message: "Email already exists" });
+        return res.status(400).json({ message: "O e-mail já existe" });
       }
       const user = await storage.createUser({
         email: input.email,
@@ -81,7 +81,7 @@ export async function registerRoutes(
       if (err instanceof z.ZodError) {
         res.status(400).json({ message: err.errors[0].message });
       } else {
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Erro interno do servidor" });
       }
     }
   });
@@ -94,12 +94,12 @@ export async function registerRoutes(
   app.post(api.auth.logout.path, (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
-      res.status(200).json({ message: "Logged out" });
+      res.status(200).json({ message: "Desconectado" });
     });
   });
 
   app.get(api.auth.me.path, (req, res) => {
-    if (!req.isAuthenticated()) return res.status(401).json({ message: "Unauthorized" });
+    if (!req.isAuthenticated()) return res.status(401).json({ message: "Não autorizado" });
     const { passwordHash, ...safeUser } = req.user!;
     res.status(200).json(safeUser);
   });
@@ -114,7 +114,7 @@ export async function registerRoutes(
       const questions = await storage.getQuestions(limit, subject, topic);
       res.status(200).json(questions);
     } catch (err) {
-      res.status(500).json({ message: "Failed to fetch questions" });
+      res.status(500).json({ message: "Falha ao buscar questões" });
     }
   });
 
@@ -137,9 +137,9 @@ export async function registerRoutes(
       res.status(200).json(result);
     } catch (err) {
       if (err instanceof z.ZodError) {
-        res.status(400).json({ message: "Invalid submission format" });
+        res.status(400).json({ message: "Formato de envio inválido" });
       } else {
-        res.status(500).json({ message: "Failed to process exam submission" });
+        res.status(500).json({ message: "Falha ao processar envio do exame" });
       }
     }
   });
@@ -152,7 +152,7 @@ export async function registerRoutes(
   // Progress Route
   app.get(api.progress.get.path, requireAuth, async (req, res) => {
     const progress = await storage.getProgress(req.user!.id);
-    if (!progress) return res.status(404).json({ message: "Progress not found" });
+    if (!progress) return res.status(404).json({ message: "Progresso não encontrado" });
     res.status(200).json(progress);
   });
 
@@ -162,14 +162,14 @@ export async function registerRoutes(
       const input = api.ai.explain.input.parse(req.body);
       const question = await storage.getQuestion(input.questionId);
       
-      if (!question) return res.status(404).json({ message: "Question not found" });
+      if (!question) return res.status(404).json({ message: "Questão não encontrada" });
       
       // MOCK AI Integration
-      const mockAiExplanation = `Here is a detailed explanation tailored for you:\n\nThe correct concept revolves around "${question.topic}" within "${question.subject}". ${question.explanation}\n\nUnderstanding this is critical for the EAGS SIN exam.`;
+      const mockAiExplanation = `Aqui está uma explicação detalhada personalizada para você:\n\nO conceito correto gira em torno de "${question.topic}" dentro de "${question.subject === 'Portuguese' ? 'Português' : question.subject === 'Specialized IT Knowledge' ? 'Conhecimentos Especializados de TI' : question.subject}". ${question.explanation}\n\nCompreender isso é fundamental para o exame EAGS SIN.`;
       
       res.status(200).json({ explanation: mockAiExplanation });
     } catch (err) {
-      res.status(400).json({ message: "Invalid request" });
+      res.status(400).json({ message: "Solicitação inválida" });
     }
   });
 
@@ -185,61 +185,61 @@ async function seedDatabase() {
     const seedQuestions = [
       {
         subject: "Portuguese",
-        topic: "Syntax",
-        questionText: "Identify the sentence where the comma is used correctly:",
+        topic: "Sintaxe",
+        questionText: "Identifique a frase onde a vírgula é usada corretamente:",
         options: [
-          "The boy who was studying, passed the exam.",
-          "The boy, who was studying, passed the exam.",
-          "The boy, who was studying passed the exam.",
-          "The boy who was studying passed, the exam."
+          "O menino que estava estudando, passou no exame.",
+          "O menino, que estava estudando, passou no exame.",
+          "O menino, que estava estudando passou no exame.",
+          "O menino que estava estudando passou, o exame."
         ],
         correctOption: 1,
-        explanation: "The explanatory relative clause must be enclosed in commas."
+        explanation: "A oração relativa explicativa deve vir entre vírgulas."
       },
       {
         subject: "Specialized IT Knowledge",
-        topic: "Computer Networks",
-        questionText: "Which layer of the OSI model is responsible for routing?",
+        topic: "Redes de Computadores",
+        questionText: "Qual camada do modelo OSI é responsável pelo roteamento?",
         options: [
-          "Data Link Layer",
-          "Transport Layer",
-          "Network Layer",
-          "Session Layer"
+          "Camada de Enlace de Dados",
+          "Camada de Transporte",
+          "Camada de Rede",
+          "Camada de Sessão"
         ],
         correctOption: 2,
-        explanation: "The Network layer (Layer 3) handles packet routing using logical addresses (like IP)."
+        explanation: "A camada de Rede (Camada 3) lida com o roteamento de pacotes usando endereços lógicos (como IP)."
       },
       {
         subject: "Specialized IT Knowledge",
-        topic: "Software Engineering",
-        questionText: "Which Agile methodology uses Sprints and a Scrum Master?",
+        topic: "Engenharia de Software",
+        questionText: "Qual metodologia Ágil utiliza Sprints e um Scrum Master?",
         options: [
           "Kanban",
           "Scrum",
           "Waterfall",
-          "Extreme Programming"
+          "Programação Extrema"
         ],
         correctOption: 1,
-        explanation: "Scrum is an agile framework that manages work through iterations called Sprints."
+        explanation: "O Scrum é uma estrutura ágil que gerencia o trabalho por meio de iterações chamadas Sprints."
       },
       {
         subject: "Specialized IT Knowledge",
-        topic: "Databases",
-        questionText: "What does the ACID property 'Atomicity' ensure?",
+        topic: "Bancos de Dados",
+        questionText: "O que a propriedade ACID 'Atomicidade' garante?",
         options: [
-          "Transactions are isolated from each other",
-          "Data is consistent before and after the transaction",
-          "A transaction is treated as a single, indivisible unit of work",
-          "Data survives system failures"
+          "As transações são isoladas umas das outras",
+          "Os dados são consistentes antes e depois da transação",
+          "Uma transação é tratada como uma unidade de trabalho única e indivisível",
+          "Os dados sobrevivem a falhas do sistema"
         ],
         correctOption: 2,
-        explanation: "Atomicity ensures that all parts of a transaction are completed; if any part fails, the entire transaction fails and leaves the database unchanged."
+        explanation: "A atomicidade garante que todas as partes de uma transação sejam concluídas; se alguma parte falhar, a transação inteira falha e deixa o banco de dados inalterado."
       }
     ];
     
     for (const q of seedQuestions) {
       await storage.createQuestion(q);
     }
-    console.log("Database seeded with sample questions.");
+    console.log("Banco de dados preenchido com questões de exemplo.");
   }
 }

@@ -16,8 +16,8 @@ export default function Dashboard() {
   const { data: history, isLoading: historyLoading } = useExamHistory();
 
   const chartData = progress && progress.totalQuestions > 0 ? [
-    { name: 'Correct', value: progress.correctAnswers, color: 'hsl(var(--primary))' },
-    { name: 'Incorrect', value: progress.wrongAnswers, color: 'hsl(var(--destructive))' }
+    { name: 'Correto', value: progress.correctAnswers, color: 'hsl(var(--primary))' },
+    { name: 'Incorreto', value: progress.wrongAnswers, color: 'hsl(var(--destructive))' }
   ] : [];
 
   const accuracy = progress && progress.totalQuestions > 0 
@@ -33,16 +33,16 @@ export default function Dashboard() {
           <div>
             <div className="flex items-center gap-3 mb-2">
               <ShieldCheck className="w-8 h-8 text-primary" />
-              <h1 className="text-3xl font-display font-bold text-foreground">COMMAND CENTER</h1>
+              <h1 className="text-3xl font-display font-bold text-foreground">CENTRO DE COMANDO</h1>
             </div>
             <p className="text-muted-foreground font-medium max-w-xl">
-              Welcome to your tactical overview, <span className="text-foreground font-bold">{user?.patent} {user?.name}</span>. Monitor your readiness and engage in specialized knowledge training.
+              Bem-vindo à sua visão tática, <span className="text-foreground font-bold">{user?.patent} {user?.name}</span>. Monitore sua prontidão e participe de treinamentos de conhecimentos especializados.
             </p>
           </div>
           <Link href="/setup">
             <Button size="lg" className="font-bold tracking-wider shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-transform">
               <Crosshair className="w-5 h-5 mr-2" />
-              INITIATE TRAINING
+              INICIAR TREINAMENTO
             </Button>
           </Link>
         </div>
@@ -55,7 +55,7 @@ export default function Dashboard() {
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-lg">
                 <Activity className="w-5 h-5 text-accent" />
-                OPERATIONAL READINESS
+                PRONTIDÃO OPERACIONAL
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -92,25 +92,25 @@ export default function Dashboard() {
                     </ResponsiveContainer>
                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none pb-8">
                       <span className="text-3xl font-display font-bold">{accuracy}%</span>
-                      <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest">Accuracy</span>
+                      <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest">Precisão</span>
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4 w-full mt-4">
                     <div className="bg-primary/5 p-3 rounded-lg border border-primary/10 flex flex-col items-center">
                       <span className="text-2xl font-bold text-primary">{progress?.correctAnswers}</span>
-                      <span className="text-xs uppercase text-muted-foreground font-semibold">Hits</span>
+                      <span className="text-xs uppercase text-muted-foreground font-semibold">Acertos</span>
                     </div>
                     <div className="bg-destructive/5 p-3 rounded-lg border border-destructive/10 flex flex-col items-center">
                       <span className="text-2xl font-bold text-destructive">{progress?.wrongAnswers}</span>
-                      <span className="text-xs uppercase text-muted-foreground font-semibold">Misses</span>
+                      <span className="text-xs uppercase text-muted-foreground font-semibold">Erros</span>
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="h-48 flex flex-col items-center justify-center text-center px-4">
                   <Target className="w-12 h-12 text-muted-foreground/30 mb-3" />
-                  <p className="text-sm font-medium text-muted-foreground">Insufficient data. Complete training modules to generate tactical analytics.</p>
+                  <p className="text-sm font-medium text-muted-foreground">Dados insuficientes. Complete módulos de treinamento para gerar análises táticas.</p>
                 </div>
               )}
             </CardContent>
@@ -122,9 +122,9 @@ export default function Dashboard() {
               <div>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <History className="w-5 h-5 text-muted-foreground" />
-                  RECENT DEPLOYMENTS
+                  DESLOCAMENTOS RECENTES
                 </CardTitle>
-                <CardDescription className="text-xs mt-1 uppercase tracking-wider font-semibold">Your latest exam results</CardDescription>
+                <CardDescription className="text-xs mt-1 uppercase tracking-wider font-semibold">Seus últimos resultados de exames</CardDescription>
               </div>
             </CardHeader>
             <CardContent className="p-0">
@@ -142,11 +142,11 @@ export default function Dashboard() {
                         </div>
                         <div>
                           <h4 className="font-bold text-foreground capitalize tracking-wide">
-                            {exam.mode.replace('_', ' ')}
+                            {exam.mode === 'mock_exam' ? 'Simulado' : 'Treinamento'}
                           </h4>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1 font-medium">
                             <Clock className="w-3 h-3" />
-                            {exam.completedAt ? format(new Date(exam.completedAt), "MMM dd, yyyy - HH:mm") : 'Unknown'}
+                            {exam.completedAt ? format(new Date(exam.completedAt), "dd/MM/yyyy - HH:mm") : 'Desconhecido'}
                           </div>
                         </div>
                       </div>
@@ -154,7 +154,7 @@ export default function Dashboard() {
                         <div className="text-lg font-display font-bold">
                           {exam.score} <span className="text-sm text-muted-foreground">/ {exam.totalQuestions}</span>
                         </div>
-                        <div className="text-[10px] uppercase tracking-wider font-bold text-muted-foreground">Score</div>
+                        <div className="text-[10px] uppercase tracking-wider font-bold text-muted-foreground">Pontuação</div>
                       </div>
                     </div>
                   ))}
@@ -164,8 +164,8 @@ export default function Dashboard() {
                   <div className="bg-muted p-4 rounded-full mb-4">
                     <History className="w-8 h-8 text-muted-foreground" />
                   </div>
-                  <h3 className="font-bold text-lg">No Service Record Found</h3>
-                  <p className="text-sm text-muted-foreground mt-1 max-w-sm">You haven't completed any training modules yet. Deploy now to start building your record.</p>
+                  <h3 className="font-bold text-lg">Nenhum Registro de Serviço Encontrado</h3>
+                  <p className="text-sm text-muted-foreground mt-1 max-w-sm">Você ainda não completou nenhum módulo de treinamento. Implante agora para começar a construir seu registro.</p>
                 </div>
               )}
             </CardContent>

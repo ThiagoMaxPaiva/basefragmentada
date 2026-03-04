@@ -114,9 +114,9 @@ export default function ExamSession() {
       <AppLayout>
         <div className="text-center py-20">
           <AlertCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
-          <h2 className="text-2xl font-bold mb-2">No Intel Available</h2>
-          <p className="text-muted-foreground mb-6">We couldn't find questions matching your criteria.</p>
-          <Button onClick={() => setLocation("/setup")}>Return to Setup</Button>
+          <h2 className="text-2xl font-bold mb-2">Nenhuma Informação Disponível</h2>
+          <p className="text-muted-foreground mb-6">Não conseguimos encontrar questões que correspondam aos seus critérios.</p>
+          <Button onClick={() => setLocation("/setup")}>Voltar para Configuração</Button>
         </div>
       </AppLayout>
     );
@@ -131,21 +131,21 @@ export default function ExamSession() {
               <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                 <CheckCircle2 className="w-12 h-12 text-primary" />
               </div>
-              <h2 className="text-4xl font-display font-bold uppercase tracking-tight mb-2">Operation Concluded</h2>
+              <h2 className="text-4xl font-display font-bold uppercase tracking-tight mb-2">Operação Concluída</h2>
               <p className="text-lg text-muted-foreground font-medium mb-8">
-                Your performance data has been transmitted to command.
+                Seus dados de desempenho foram transmitidos ao comando.
               </p>
               
               {submitExam.isPending ? (
                 <div className="flex flex-col items-center gap-4 text-muted-foreground">
                   <Spinner size="lg" />
-                  <span className="font-bold tracking-widest text-sm uppercase">Processing Analytics...</span>
+                  <span className="font-bold tracking-widest text-sm uppercase">Processando Análises...</span>
                 </div>
               ) : submitExam.data ? (
                 <div className="w-full bg-card border border-border/50 rounded-2xl p-8 mb-8 shadow-inner">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="flex flex-col items-center">
-                      <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-1">Score</span>
+                      <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-1">Pontos</span>
                       <span className="text-4xl font-display font-bold text-foreground">{submitExam.data.score}</span>
                     </div>
                     <div className="flex flex-col items-center">
@@ -153,23 +153,23 @@ export default function ExamSession() {
                       <span className="text-4xl font-display font-bold text-foreground">{submitExam.data.totalQuestions}</span>
                     </div>
                     <div className="flex flex-col items-center">
-                      <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-1">Accuracy</span>
+                      <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-1">Precisão</span>
                       <span className="text-4xl font-display font-bold text-primary">
                         {Math.round((submitExam.data.score / submitExam.data.totalQuestions) * 100)}%
                       </span>
                     </div>
                     <div className="flex flex-col items-center">
-                      <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-1">Mode</span>
-                      <span className="text-xl font-display font-bold text-secondary uppercase mt-2">{mode.replace('_', ' ')}</span>
+                      <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-1">Modo</span>
+                      <span className="text-xl font-display font-bold text-secondary uppercase mt-2">{mode === 'mock_exam' ? 'Simulado' : 'Treinamento'}</span>
                     </div>
                   </div>
                 </div>
               ) : (
-                <p className="text-destructive font-bold">Failed to sync results. Local copy retained.</p>
+                <p className="text-destructive font-bold">Falha ao sincronizar resultados. Cópia local retida.</p>
               )}
               
               <Button size="lg" onClick={() => setLocation("/dashboard")} className="font-bold tracking-widest px-8">
-                RETURN TO COMMAND
+                VOLTAR AO COMANDO
               </Button>
             </CardContent>
           </Card>
@@ -192,7 +192,7 @@ export default function ExamSession() {
               Q{currentIndex + 1} <span className="text-primary-foreground/50 text-base">/ {questions.length}</span>
             </div>
             <div>
-              <div className="text-xs uppercase font-bold text-muted-foreground tracking-widest">{subject}</div>
+              <div className="text-xs uppercase font-bold text-muted-foreground tracking-widest">{subject === "Portuguese" ? "Português" : subject === "Specialized IT Knowledge" ? "Conhecimentos Especializados de TI" : subject}</div>
               <div className="text-sm font-semibold truncate max-w-[200px]">{currentQuestion?.topic}</div>
             </div>
           </div>
@@ -270,7 +270,7 @@ export default function ExamSession() {
                     className="mt-8 pt-6 border-t border-border"
                   >
                     <div className="bg-muted p-5 rounded-xl border border-border/50">
-                      <h4 className="font-bold uppercase tracking-widest text-xs text-muted-foreground mb-2">Standard Explanation</h4>
+                      <h4 className="font-bold uppercase tracking-widest text-xs text-muted-foreground mb-2">Explicação Padrão</h4>
                       <p className="text-sm font-medium">{currentQuestion?.explanation}</p>
                       
                       <div className="mt-4 pt-4 border-t border-border/50">
@@ -278,7 +278,7 @@ export default function ExamSession() {
                           <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 relative">
                             <BrainCircuit className="w-5 h-5 absolute top-4 right-4 text-primary opacity-20" />
                             <h4 className="font-bold text-primary mb-2 text-sm flex items-center gap-2">
-                              <BrainCircuit className="w-4 h-4" /> Tactical AI Analysis
+                              <BrainCircuit className="w-4 h-4" /> Análise Tática de IA
                             </h4>
                             <p className="text-sm leading-relaxed">{aiText}</p>
                           </div>
@@ -291,7 +291,7 @@ export default function ExamSession() {
                             className="bg-card hover:bg-primary/5 hover:text-primary hover:border-primary/30"
                           >
                             {aiExp.isPending ? <Spinner size="sm" className="mr-2" /> : <BrainCircuit className="w-4 h-4 mr-2" />}
-                            Request Deep AI Analysis
+                            Solicitar Análise Profunda de IA
                           </Button>
                         )}
                       </div>
@@ -312,7 +312,7 @@ export default function ExamSession() {
             disabled={!isAnswered && mode === "training"} // Must answer in training to move on
             className="font-bold tracking-widest pl-8 pr-6 group h-14"
           >
-            {currentIndex === questions.length - 1 ? "FINISH MODULE" : "NEXT TARGET"}
+            {currentIndex === questions.length - 1 ? "CONCLUIR MÓDULO" : "PRÓXIMO ALVO"}
             <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>

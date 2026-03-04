@@ -47,9 +47,9 @@ export default function AuthPage() {
           <div className="p-4 bg-primary-foreground/10 inline-block rounded-2xl backdrop-blur-sm border border-primary-foreground/20 shadow-2xl">
             <PlaneTakeoff className="w-16 h-16 text-accent" />
           </div>
-          <h1 className="text-5xl font-display font-bold leading-tight">AERO TACTICS <br/><span className="text-accent">COMMAND</span></h1>
+          <h1 className="text-5xl font-display font-bold leading-tight">AERO TÁTICO <br/><span className="text-accent">COMANDO</span></h1>
           <p className="text-lg text-primary-foreground/80 font-medium">
-            Advanced preparation system for aeronautical specialized knowledge and strategic evaluation. Establish your credentials to begin training.
+            Sistema avançado de preparação para conhecimentos especializados aeronáuticos e avaliação estratégica. Estabeleça suas credenciais para iniciar o treinamento.
           </p>
           <div className="pt-8 flex items-center gap-4">
             <div className="flex -space-x-4">
@@ -59,7 +59,7 @@ export default function AuthPage() {
                 </div>
               ))}
             </div>
-            <span className="text-sm font-semibold tracking-wider text-primary-foreground/70">JOIN ELITE OPERATORS</span>
+            <span className="text-sm font-semibold tracking-wider text-primary-foreground/70">JUNTE-SE AOS OPERADORES DE ELITE</span>
           </div>
         </div>
       </div>
@@ -72,10 +72,10 @@ export default function AuthPage() {
               <Shield className="w-6 h-6" />
             </div>
             <CardTitle className="text-2xl font-display font-bold text-foreground">
-              {isLogin ? "AUTHENTICATE CREDENTIALS" : "INITIATE ENLISTMENT"}
+              {isLogin ? "AUTENTICAR CREDENCIAIS" : "INICIAR ALISTAMENTO"}
             </CardTitle>
             <CardDescription className="font-medium text-muted-foreground">
-              {isLogin ? "Enter your clearance codes to access the system" : "Provide personnel details for new registry"}
+              {isLogin ? "Insira seus códigos de acesso para entrar no sistema" : "Forneça os detalhes pessoais para o novo registro"}
             </CardDescription>
           </CardHeader>
           
@@ -91,13 +91,13 @@ export default function AuthPage() {
                 >
                   <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="login-email">Communication ID</Label>
+                      <Label htmlFor="login-email">ID de Comunicação</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input 
                           id="login-email" 
                           type="email" 
-                          placeholder="operator@aero.mil" 
+                          placeholder="operador@aero.mil" 
                           className="pl-10 h-11"
                           {...loginForm.register("email")}
                         />
@@ -107,7 +107,7 @@ export default function AuthPage() {
                       )}
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="login-password">Clearance Code</Label>
+                      <Label htmlFor="login-password">Código de Acesso</Label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input 
@@ -120,7 +120,7 @@ export default function AuthPage() {
                     </div>
                     <Button type="submit" className="w-full h-11 font-bold tracking-wider mt-6" disabled={login.isPending}>
                       {login.isPending ? <Spinner size="sm" className="mr-2" /> : null}
-                      AUTHORIZE ACCESS
+                      AUTORIZAR ACESSO
                     </Button>
                   </form>
                 </motion.div>
@@ -134,32 +134,32 @@ export default function AuthPage() {
                 >
                   <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="reg-name">Designation (Name)</Label>
+                      <Label htmlFor="reg-name">Designação (Nome)</Label>
                       <div className="relative">
                         <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input 
                           id="reg-name" 
-                          placeholder="John Doe" 
+                          placeholder="João Silva" 
                           className="pl-10 h-11"
                           {...registerForm.register("name")}
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="reg-email">Communication ID</Label>
+                      <Label htmlFor="reg-email">ID de Comunicação</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input 
                           id="reg-email" 
                           type="email" 
-                          placeholder="operator@aero.mil" 
+                          placeholder="operador@aero.mil" 
                           className="pl-10 h-11"
                           {...registerForm.register("email")}
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="reg-password">Clearance Code</Label>
+                      <Label htmlFor="reg-password">Código de Acesso</Label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input 
@@ -172,7 +172,7 @@ export default function AuthPage() {
                     </div>
                     <Button type="submit" variant="secondary" className="w-full h-11 font-bold tracking-wider mt-6" disabled={register.isPending}>
                       {register.isPending ? <Spinner size="sm" className="mr-2" /> : null}
-                      SUBMIT ENLISTMENT
+                      ENVIAR ALISTAMENTO
                     </Button>
                   </form>
                 </motion.div>
@@ -185,7 +185,7 @@ export default function AuthPage() {
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
               onClick={() => setIsLogin(!isLogin)}
             >
-              {isLogin ? "Need authorization? Request enlistment." : "Already authorized? Authenticate here."}
+              {isLogin ? "Precisa de autorização? Solicite alistamento." : "Já possui autorização? Autentique-se aqui."}
             </Button>
           </CardFooter>
         </Card>

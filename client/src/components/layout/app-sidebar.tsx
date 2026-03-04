@@ -21,13 +21,13 @@ export function AppSidebar() {
   const { data: user } = useUser();
 
   const mainNav = [
-    { title: "Command Center", url: "/dashboard", icon: Home },
-    { title: "Start Training", url: "/setup", icon: Crosshair },
+    { title: "Centro de Comando", url: "/dashboard", icon: Home },
+    { title: "Iniciar Treinamento", url: "/setup", icon: Crosshair },
   ];
 
   const subNav = [
-    { title: "Service Record", url: "/history", icon: History },
-    { title: "Manuals", url: "#", icon: BookOpen },
+    { title: "Registro de Serviço", url: "/history", icon: History },
+    { title: "Manuais", url: "#", icon: BookOpen },
   ];
 
   return (
@@ -38,8 +38,8 @@ export function AppSidebar() {
             <Shield className="w-6 h-6" />
           </div>
           <div className="flex flex-col flex-1 truncate data-[state=collapsed]:hidden">
-            <span className="font-display font-bold text-lg leading-tight truncate">AERO TACTICS</span>
-            <span className="text-xs text-muted-foreground uppercase tracking-widest">Training System</span>
+            <span className="font-display font-bold text-lg leading-tight truncate">AERO TÁTICO</span>
+            <span className="text-xs text-muted-foreground uppercase tracking-widest">Sistema de Treinamento</span>
           </div>
         </div>
       </SidebarHeader>
@@ -48,7 +48,7 @@ export function AppSidebar() {
       
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="font-display tracking-widest text-xs">Operations</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-display tracking-widest text-xs">Operações</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNav.map((item) => (
@@ -71,7 +71,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="font-display tracking-widest text-xs">Archives</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-display tracking-widest text-xs">Arquivos</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {subNav.map((item) => (
@@ -97,9 +97,9 @@ export function AppSidebar() {
       <SidebarFooter className="p-4">
         {user && (
           <div className="flex flex-col gap-2 mb-4 px-2 data-[state=collapsed]:hidden">
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Identified As</div>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Identificado Como</div>
             <div className="flex flex-col bg-card/50 p-3 rounded-md border border-border">
-              <span className="font-display text-sm text-primary font-bold">{user.patent}</span>
+              <span className="font-display text-sm text-primary font-bold">{user.patent === "Civilian" ? "Civil" : user.patent === "Recruit" ? "Recruta" : user.patent === "Student" ? "Aluno" : user.patent === "Third Sergeant" ? "Terceiro-Sargento" : user.patent}</span>
               <span className="text-sm font-medium truncate">{user.name}</span>
             </div>
           </div>
@@ -108,7 +108,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton onClick={() => logout()} className="text-destructive hover:text-destructive hover:bg-destructive/10 transition-colors">
               <LogOut className="w-4 h-4" />
-              <span className="font-bold">DISCONNECT</span>
+              <span className="font-bold">DESCONECTAR</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
