@@ -184,62 +184,130 @@ async function seedDatabase() {
   if (questions.length === 0) {
     const seedQuestions = [
       {
+        subject: "Specialized IT Knowledge",
+        topic: "Linux",
+        questionText: "Linux: Permissão '-rwxr-x---' em octal?",
+        options: ["750", "751", "754", "777"],
+        correctOption: 0,
+        explanation: "Dono(7)+Grupo(5)+Outros(0)."
+      },
+      {
         subject: "Portuguese",
-        topic: "Sintaxe",
-        questionText: "Identifique a frase onde a vírgula é usada corretamente:",
-        options: [
-          "O menino que estava estudando, passou no exame.",
-          "O menino, que estava estudando, passou no exame.",
-          "O menino, que estava estudando passou no exame.",
-          "O menino que estava estudando passou, o exame."
-        ],
+        topic: "Regência",
+        questionText: "Regência 'Aspirar' (desejar)?",
+        options: ["VTD", "VTI (exige 'a')", "Intransitivo", "VTI (exige 'de')"],
         correctOption: 1,
-        explanation: "A oração relativa explicativa deve vir entre vírgulas."
+        explanation: "Aspirar ao cargo."
       },
       {
         subject: "Specialized IT Knowledge",
-        topic: "Redes de Computadores",
-        questionText: "Qual camada do modelo OSI é responsável pelo roteamento?",
-        options: [
-          "Camada de Enlace de Dados",
-          "Camada de Transporte",
-          "Camada de Rede",
-          "Camada de Sessão"
-        ],
+        topic: "SQL",
+        questionText: "SQL: Apagar tabela completa?",
+        options: ["DELETE", "TRUNCATE", "DROP", "REMOVE"],
         correctOption: 2,
-        explanation: "A camada de Rede (Camada 3) lida com o roteamento de pacotes usando endereços lógicos (como IP)."
+        explanation: "DROP TABLE remove estrutura e dados."
       },
       {
         subject: "Specialized IT Knowledge",
-        topic: "Engenharia de Software",
-        questionText: "Qual metodologia Ágil utiliza Sprints e um Scrum Master?",
-        options: [
-          "Kanban",
-          "Scrum",
-          "Waterfall",
-          "Programação Extrema"
-        ],
+        topic: "Redes",
+        questionText: "Hosts em /27?",
+        options: ["32", "30", "16", "14"],
         correctOption: 1,
-        explanation: "O Scrum é uma estrutura ágil que gerencia o trabalho por meio de iterações chamadas Sprints."
+        explanation: "32 IPs - 2 = 30 Hosts."
+      },
+      {
+        subject: "Portuguese",
+        topic: "Crase",
+        questionText: "Crase obrigatória?",
+        options: ["Fui a pé", "Vou à escola", "Falei a ela", "Venda a prazo"],
+        correctOption: 1,
+        explanation: "Vou a + a escola."
       },
       {
         subject: "Specialized IT Knowledge",
-        topic: "Bancos de Dados",
-        questionText: "O que a propriedade ACID 'Atomicidade' garante?",
-        options: [
-          "As transações são isoladas umas das outras",
-          "Os dados são consistentes antes e depois da transação",
-          "Uma transação é tratada como uma unidade de trabalho única e indivisível",
-          "Os dados sobrevivem a falhas do sistema"
-        ],
+        topic: "Redes",
+        questionText: "Transporte confiável?",
+        options: ["UDP", "IP", "TCP", "ICMP"],
         correctOption: 2,
-        explanation: "A atomicidade garante que todas as partes de uma transação sejam concluídas; se alguma parte falhar, a transação inteira falha e deixa o banco de dados inalterado."
+        explanation: "TCP garante entrega."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Hardware",
+        questionText: "Diferença M.2 SATA vs NVMe?",
+        options: ["NVMe usa PCIe (rápido)", "Iguais", "SATA mais rápido", "USB"],
+        correctOption: 0,
+        explanation: "NVMe via PCIe é superior."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Hardware",
+        questionText: "Selo 80 Plus?",
+        options: ["80% potência", "Eficiência >= 80%", "80 Volts", "Durabilidade"],
+        correctOption: 1,
+        explanation: "Eficiência energética."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Hardware",
+        questionText: "Hyper-Threading?",
+        options: ["Overclock", "2 threads por núcleo", "Virtualização", "Cache"],
+        correctOption: 1,
+        explanation: "Simula núcleos lógicos."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Hardware",
+        questionText: "Bateria CR2032?",
+        options: ["CPU", "BIOS/Relógio", "LED", "SSD"],
+        correctOption: 1,
+        explanation: "Mantém CMOS."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Redes",
+        questionText: "STP (Spanning Tree)?",
+        options: ["Velocidade", "Evitar loops L2", "Roteamento", "Cripto"],
+        correctOption: 1,
+        explanation: "Evita broadcast storms."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Redes",
+        questionText: "IP APIPA?",
+        options: ["192.168.x.x", "10.x.x.x", "169.254.x.x", "172.16.x.x"],
+        correctOption: 2,
+        explanation: "Sem DHCP."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Redes",
+        questionText: "Wi-Fi 6 (802.11ax)?",
+        options: ["Alcance", "2.4GHz só", "Eficiência (OFDMA)", "Segurança"],
+        correctOption: 2,
+        explanation: "Alta densidade."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Redes",
+        questionText: "Porta Tronco (Cisco)?",
+        options: ["access", "trunk", "vlan", "interface"],
+        correctOption: 1,
+        explanation: "switchport mode trunk."
+      },
+      {
+        subject: "Specialized IT Knowledge",
+        topic: "Redes",
+        questionText: "Default Gateway?",
+        options: ["DNS", "Roteador de saída", "Broadcast", "Máscara"],
+        correctOption: 1,
+        explanation: "Saída para internet."
       }
     ];
     
     for (const q of seedQuestions) {
       await storage.createQuestion(q);
     }
-    console.log("Banco de dados preenchido com questões de exemplo.");
+    console.log("Banco de dados preenchido com as novas questões.");
   }
 }
