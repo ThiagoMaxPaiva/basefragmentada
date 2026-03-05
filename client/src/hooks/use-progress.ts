@@ -7,7 +7,7 @@ export function useProgress() {
     queryFn: async () => {
       const res = await fetch(api.progress.get.path, { credentials: "include" });
       if (res.status === 404) return null; // No progress yet is fine
-      if (!res.ok) throw new Error("Failed to fetch progress");
+      if (!res.ok) throw new Error("Falha ao carregar progresso");
       return api.progress.get.responses[200].parse(await res.json());
     },
   });

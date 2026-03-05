@@ -30,13 +30,13 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-4">
               <SidebarTrigger className="text-muted-foreground hover:text-foreground transition-colors" />
               <div className="h-4 w-[1px] bg-border hidden sm:block"></div>
-              <h2 className="text-lg font-display font-semibold hidden sm:block text-muted-foreground">MILITARY READINESS PROTOCOL</h2>
+              <h2 className="text-lg font-display font-semibold hidden sm:block text-muted-foreground">PROTOCOLO DE PRONTIDÃO MILITAR</h2>
             </div>
             <div className="flex items-center gap-4">
               {/* Optional: Add theme toggle or notification icon here */}
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs font-bold tracking-widest text-green-600 dark:text-green-400">SYSTEM ONLINE</span>
+                <span className="text-xs font-bold tracking-widest text-green-600 dark:text-green-400">SISTEMA ONLINE</span>
               </div>
             </div>
           </header>

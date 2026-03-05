@@ -9,7 +9,7 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
   name: text("name").notNull(),
-  patent: text("patent").notNull().default("Civilian"), // Ranks: Civilian, Recruit, Student, Third Sergeant, etc.
+  patent: text("patent").notNull().default("Civil"), // Ranks: Civil, Recruta, Aluno, Terceiro-Sargento, etc.
   createdAt: timestamp("created_at").defaultNow(),
 });
 

@@ -10,7 +10,7 @@ export function useUser() {
     queryFn: async () => {
       const res = await fetch(api.auth.me.path, { credentials: "include" });
       if (res.status === 401) return null;
-      if (!res.ok) throw new Error("Failed to fetch user");
+      if (!res.ok) throw new Error("Falha ao carregar usuário");
       return api.auth.me.responses[200].parse(await res.json());
     },
     staleTime: Infinity,
@@ -36,17 +36,17 @@ export function useLogin() {
           const error = api.auth.login.responses[401].parse(await res.json());
           throw new Error(error.message);
         }
-        throw new Error("Failed to login");
+        throw new Error("Falha no acesso");
       }
       return api.auth.login.responses[200].parse(await res.json());
     },
     onSuccess: (data) => {
       queryClient.setQueryData([api.auth.me.path], data);
-      toast({ title: "Login successful", description: "Welcome back commander." });
+      toast({ title: "Login realizado com sucesso", description: "Bem-vindo de volta, comandante." });
       setLocation("/dashboard");
     },
     onError: (error: Error) => {
-      toast({ title: "Login failed", description: error.message, variant: "destructive" });
+      toast({ title: "Falha no login", description: error.message, variant: "destructive" });
     }
   });
 }
@@ -70,17 +70,17 @@ export function useRegister() {
           const error = api.auth.register.responses[400].parse(await res.json());
           throw new Error(error.message);
         }
-        throw new Error("Failed to register");
+        throw new Error("Falha ao registrar");
       }
       return api.auth.register.responses[201].parse(await res.json());
     },
     onSuccess: (data) => {
       queryClient.setQueryData([api.auth.me.path], data);
-      toast({ title: "Registration successful", description: "Account created successfully." });
+      toast({ title: "Registro realizado com sucesso", description: "Conta criada com sucesso." });
       setLocation("/dashboard");
     },
     onError: (error: Error) => {
-      toast({ title: "Registration failed", description: error.message, variant: "destructive" });
+      toast({ title: "Falha no registro", description: error.message, variant: "destructive" });
     }
   });
 }
@@ -96,11 +96,11 @@ export function useLogout() {
         method: api.auth.logout.method,
         credentials: "include",
       });
-      if (!res.ok) throw new Error("Failed to logout");
+      if (!res.ok) throw new Error("Falha ao sair");
     },
     onSuccess: () => {
       queryClient.setQueryData([api.auth.me.path], null);
-      toast({ title: "Logged out", description: "You have been logged out securely." });
+      toast({ title: "Sessão encerrada", description: "Você saiu com segurança." });
       setLocation("/auth");
     },
   });

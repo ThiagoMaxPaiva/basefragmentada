@@ -11,7 +11,7 @@ export function useAIExplanation() {
         credentials: "include",
       });
       
-      if (!res.ok) throw new Error("Failed to get AI explanation");
+      if (!res.ok) throw new Error("Falha ao obter explicação da IA");
       return api.ai.explain.responses[200].parse(await res.json());
     },
   });

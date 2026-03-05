@@ -16,17 +16,17 @@ export function useSubmitExam() {
         credentials: "include",
       });
       
-      if (!res.ok) throw new Error("Failed to submit exam");
+      if (!res.ok) throw new Error("Falha ao enviar exame");
       return api.exams.submit.responses[200].parse(await res.json());
     },
     onSuccess: () => {
       // Invalidate both history and progress on new submission
       queryClient.invalidateQueries({ queryKey: [api.exams.history.path] });
       queryClient.invalidateQueries({ queryKey: [api.progress.get.path] });
-      toast({ title: "Mission Accomplished", description: "Exam submitted and recorded." });
+      toast({ title: "Missão Cumprida", description: "Exame enviado e registrado." });
     },
     onError: (error) => {
-      toast({ title: "Submission Failed", description: error.message, variant: "destructive" });
+      toast({ title: "Falha no Envio", description: error.message, variant: "destructive" });
     }
   });
 }
@@ -36,7 +36,7 @@ export function useExamHistory() {
     queryKey: [api.exams.history.path],
     queryFn: async () => {
       const res = await fetch(api.exams.history.path, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch exam history");
+      if (!res.ok) throw new Error("Falha ao buscar histórico de exames");
       return api.exams.history.responses[200].parse(await res.json());
     },
   });
