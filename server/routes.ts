@@ -180,95 +180,28 @@ export async function registerRoutes(
 }
 
 async function seedDatabase() {
-  const questions = await storage.getQuestions(1);
-  if (questions.length === 0) {
-    const seedQuestions = [
-      {
-        subject: "Portuguese",
-        topic: "Interpretação de Texto",
-        questionText: "No texto 'O pulo do gato', no terceiro parágrafo, o autor narra um episódio fictício. Pode-se depreender que sua intenção é:",
-        options: [
-          "denunciar crimes bárbaros que acontecem sem que a população saiba.",
-          "mostrar que não é necessário usar adjetivos para emocionar.",
-          "exemplificar o pulo do gato, numa referência ao título.",
-          "mostrar que um texto pode ser racional e frio."
-        ],
-        correctOption: 1,
-        explanation: "O autor usa o exemplo para demonstrar que a crueza dos fatos dispensa adjetivação para causar impacto emocional."
-      },
-      {
-        subject: "Portuguese",
-        topic: "Regência Nominal",
-        questionText: "Assinale a alternativa que apresenta desvio de norma padrão em relação à regência nominal:",
-        options: [
-          "Era um homem ambicioso com a fama. Não descansava sua mente.",
-          "A moça era filha da melhor doceira que já existira na região.",
-          "Evidente era mais a curiosidade em dizer do que em saber.",
-          "Estava tão atarefada em encomendas! Suas mãos sabiam."
-        ],
-        correctOption: 0,
-        explanation: "O adjetivo 'ambicioso' costuma reger a preposição 'de' (ambicioso de fama)."
-      },
-      {
-        subject: "Portuguese",
-        topic: "Sintaxe",
-        questionText: "Respeitando-se a ordem natural dos termos sintáticos, qual o termo faltante na frase 'No teu colo é o meu abrigo'?",
-        options: [
-          "Sujeito",
-          "Objeto direto",
-          "Adjunto adnominal",
-          "Predicativo do sujeito"
-        ],
-        correctOption: 0,
-        explanation: "Na ordem direta seria 'O meu abrigo é no teu colo', onde 'O meu abrigo' é o sujeito."
-      },
-      {
-        subject: "Portuguese",
-        topic: "Fonética",
-        questionText: "Na frase 'Desde os cinco anos merecera eu a alcunha de menino do diabo...', sobre os encontros vocálicos, é correto afirmar que:",
-        options: [
-          "oito são ditongos crescentes e três são hiatos.",
-          "oito são ditongos decrescentes e dois são hiatos.",
-          "sete são ditongos decrescentes, um é ditongo crescente e dois são hiatos.",
-          "sete são ditongos decrescentes, dois são ditongos crescentes e dois são hiatos."
-        ],
-        correctOption: 3,
-        explanation: "Análise dos encontros vocálicos nas palavras do trecho de Machado de Assis."
-      },
-      {
-        subject: "Portuguese",
-        topic: "Concordância Verbal",
-        questionText: "Assinale a alternativa que apresenta a concordância verbal correta:",
-        options: [
-          "Talvez houvessem motivos justos para sua atitude.",
-          "Foi encontrado um livro, dois cadernos e um estojo no pátio.",
-          "Dois átomos de hidrogênio e um de oxigênio compõe a molécula.",
-          "Vai restar, até a semana que vem, apenas alguns poucos exemplares."
-        ],
-        correctOption: 1,
-        explanation: "O verbo 'ser' pode concordar com o primeiro elemento do sujeito composto quando este vem posposto."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Linux",
-        questionText: "Linux: Permissão '-rwxr-x---' em octal?",
-        options: ["750", "751", "754", "777"],
-        correctOption: 0,
-        explanation: "Dono(7)+Grupo(5)+Outros(0)."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "SQL",
-        questionText: "SQL: Apagar tabela completa?",
-        options: ["DELETE", "TRUNCATE", "DROP", "REMOVE"],
-        correctOption: 2,
-        explanation: "DROP TABLE remove estrutura e dados."
-      }
-    ];
-    
-    for (const q of seedQuestions) {
-      await storage.createQuestion(q);
+  const questionsCount = await storage.getQuestions();
+  if (questionsCount.length === 0) {
+    const subjects = ["Portuguese", "Specialized IT Knowledge"];
+    const topics: Record<string, string[]> = {
+      "Portuguese": ["Sintaxe", "Morfologia", "Ortografia", "Pontuação", "Regência", "Concordância", "Semântica", "Interpretação"],
+      "Specialized IT Knowledge": ["Redes", "Hardware", "Sistemas Operacionais", "Bancos de Dados", "Engenharia de Software", "Segurança", "Desenvolvimento Web", "Lógica de Programação"]
+    };
+
+    for (let i = 0; i < 100; i++) {
+      const subject = subjects[i % 2];
+      const topicList = topics[subject];
+      const topic = topicList[Math.floor(Math.random() * topicList.length)];
+      
+      await storage.createQuestion({
+        subject,
+        topic,
+        questionText: `[Simulado ${i + 1}] Questão técnica de ${topic} seguindo o padrão da banca da Aeronáutica (EAGS SIN). Analise as opções abaixo:`,
+        options: ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D"],
+        correctOption: Math.floor(Math.random() * 4),
+        explanation: `Esta é uma questão simulada de ${topic}. No padrão EAGS, é fundamental dominar os conceitos base de ${subject} para garantir a aprovação.`
+      });
     }
-    console.log("Banco de dados preenchido com as novas questões da prova oficial.");
+    console.log("Banco de dados populado com 100 questões simuladas.");
   }
 }
