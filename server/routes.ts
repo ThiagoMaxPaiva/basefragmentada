@@ -180,28 +180,7 @@ export async function registerRoutes(
 }
 
 async function seedDatabase() {
-  const questionsCount = await storage.getQuestions();
-  if (questionsCount.length === 0) {
-    const subjects = ["Portuguese", "Specialized IT Knowledge"];
-    const topics: Record<string, string[]> = {
-      "Portuguese": ["Sintaxe", "Morfologia", "Ortografia", "Pontuação", "Regência", "Concordância", "Semântica", "Interpretação"],
-      "Specialized IT Knowledge": ["Redes", "Hardware", "Sistemas Operacionais", "Bancos de Dados", "Engenharia de Software", "Segurança", "Desenvolvimento Web", "Lógica de Programação"]
-    };
-
-    for (let i = 0; i < 100; i++) {
-      const subject = subjects[i % 2];
-      const topicList = topics[subject];
-      const topic = topicList[Math.floor(Math.random() * topicList.length)];
-      
-      await storage.createQuestion({
-        subject,
-        topic,
-        questionText: `[Simulado ${i + 1}] Questão técnica de ${topic} seguindo o padrão da banca da Aeronáutica (EAGS SIN). Analise as opções abaixo:`,
-        options: ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D"],
-        correctOption: Math.floor(Math.random() * 4),
-        explanation: `Esta é uma questão simulada de ${topic}. No padrão EAGS, é fundamental dominar os conceitos base de ${subject} para garantir a aprovação.`
-      });
-    }
-    console.log("Banco de dados populado com 100 questões simuladas.");
-  }
+  // Database is now populated via external SQL import for high volume.
+  // This seed function is kept empty to avoid overwriting production-ready questions.
+  console.log("Sistema de questões pronto.");
 }
