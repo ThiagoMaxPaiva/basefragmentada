@@ -184,6 +184,71 @@ async function seedDatabase() {
   if (questions.length === 0) {
     const seedQuestions = [
       {
+        subject: "Portuguese",
+        topic: "Interpretação de Texto",
+        questionText: "No texto 'O pulo do gato', no terceiro parágrafo, o autor narra um episódio fictício. Pode-se depreender que sua intenção é:",
+        options: [
+          "denunciar crimes bárbaros que acontecem sem que a população saiba.",
+          "mostrar que não é necessário usar adjetivos para emocionar.",
+          "exemplificar o pulo do gato, numa referência ao título.",
+          "mostrar que um texto pode ser racional e frio."
+        ],
+        correctOption: 1,
+        explanation: "O autor usa o exemplo para demonstrar que a crueza dos fatos dispensa adjetivação para causar impacto emocional."
+      },
+      {
+        subject: "Portuguese",
+        topic: "Regência Nominal",
+        questionText: "Assinale a alternativa que apresenta desvio de norma padrão em relação à regência nominal:",
+        options: [
+          "Era um homem ambicioso com a fama. Não descansava sua mente.",
+          "A moça era filha da melhor doceira que já existira na região.",
+          "Evidente era mais a curiosidade em dizer do que em saber.",
+          "Estava tão atarefada em encomendas! Suas mãos sabiam."
+        ],
+        correctOption: 0,
+        explanation: "O adjetivo 'ambicioso' costuma reger a preposição 'de' (ambicioso de fama)."
+      },
+      {
+        subject: "Portuguese",
+        topic: "Sintaxe",
+        questionText: "Respeitando-se a ordem natural dos termos sintáticos, qual o termo faltante na frase 'No teu colo é o meu abrigo'?",
+        options: [
+          "Sujeito",
+          "Objeto direto",
+          "Adjunto adnominal",
+          "Predicativo do sujeito"
+        ],
+        correctOption: 0,
+        explanation: "Na ordem direta seria 'O meu abrigo é no teu colo', onde 'O meu abrigo' é o sujeito."
+      },
+      {
+        subject: "Portuguese",
+        topic: "Fonética",
+        questionText: "Na frase 'Desde os cinco anos merecera eu a alcunha de menino do diabo...', sobre os encontros vocálicos, é correto afirmar que:",
+        options: [
+          "oito são ditongos crescentes e três são hiatos.",
+          "oito são ditongos decrescentes e dois são hiatos.",
+          "sete são ditongos decrescentes, um é ditongo crescente e dois são hiatos.",
+          "sete são ditongos decrescentes, dois são ditongos crescentes e dois são hiatos."
+        ],
+        correctOption: 3,
+        explanation: "Análise dos encontros vocálicos nas palavras do trecho de Machado de Assis."
+      },
+      {
+        subject: "Portuguese",
+        topic: "Concordância Verbal",
+        questionText: "Assinale a alternativa que apresenta a concordância verbal correta:",
+        options: [
+          "Talvez houvessem motivos justos para sua atitude.",
+          "Foi encontrado um livro, dois cadernos e um estojo no pátio.",
+          "Dois átomos de hidrogênio e um de oxigênio compõe a molécula.",
+          "Vai restar, até a semana que vem, apenas alguns poucos exemplares."
+        ],
+        correctOption: 1,
+        explanation: "O verbo 'ser' pode concordar com o primeiro elemento do sujeito composto quando este vem posposto."
+      },
+      {
         subject: "Specialized IT Knowledge",
         topic: "Linux",
         questionText: "Linux: Permissão '-rwxr-x---' em octal?",
@@ -192,122 +257,18 @@ async function seedDatabase() {
         explanation: "Dono(7)+Grupo(5)+Outros(0)."
       },
       {
-        subject: "Portuguese",
-        topic: "Regência",
-        questionText: "Regência 'Aspirar' (desejar)?",
-        options: ["VTD", "VTI (exige 'a')", "Intransitivo", "VTI (exige 'de')"],
-        correctOption: 1,
-        explanation: "Aspirar ao cargo."
-      },
-      {
         subject: "Specialized IT Knowledge",
         topic: "SQL",
         questionText: "SQL: Apagar tabela completa?",
         options: ["DELETE", "TRUNCATE", "DROP", "REMOVE"],
         correctOption: 2,
         explanation: "DROP TABLE remove estrutura e dados."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Redes",
-        questionText: "Hosts em /27?",
-        options: ["32", "30", "16", "14"],
-        correctOption: 1,
-        explanation: "32 IPs - 2 = 30 Hosts."
-      },
-      {
-        subject: "Portuguese",
-        topic: "Crase",
-        questionText: "Crase obrigatória?",
-        options: ["Fui a pé", "Vou à escola", "Falei a ela", "Venda a prazo"],
-        correctOption: 1,
-        explanation: "Vou a + a escola."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Redes",
-        questionText: "Transporte confiável?",
-        options: ["UDP", "IP", "TCP", "ICMP"],
-        correctOption: 2,
-        explanation: "TCP garante entrega."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Hardware",
-        questionText: "Diferença M.2 SATA vs NVMe?",
-        options: ["NVMe usa PCIe (rápido)", "Iguais", "SATA mais rápido", "USB"],
-        correctOption: 0,
-        explanation: "NVMe via PCIe é superior."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Hardware",
-        questionText: "Selo 80 Plus?",
-        options: ["80% potência", "Eficiência >= 80%", "80 Volts", "Durabilidade"],
-        correctOption: 1,
-        explanation: "Eficiência energética."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Hardware",
-        questionText: "Hyper-Threading?",
-        options: ["Overclock", "2 threads por núcleo", "Virtualização", "Cache"],
-        correctOption: 1,
-        explanation: "Simula núcleos lógicos."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Hardware",
-        questionText: "Bateria CR2032?",
-        options: ["CPU", "BIOS/Relógio", "LED", "SSD"],
-        correctOption: 1,
-        explanation: "Mantém CMOS."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Redes",
-        questionText: "STP (Spanning Tree)?",
-        options: ["Velocidade", "Evitar loops L2", "Roteamento", "Cripto"],
-        correctOption: 1,
-        explanation: "Evita broadcast storms."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Redes",
-        questionText: "IP APIPA?",
-        options: ["192.168.x.x", "10.x.x.x", "169.254.x.x", "172.16.x.x"],
-        correctOption: 2,
-        explanation: "Sem DHCP."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Redes",
-        questionText: "Wi-Fi 6 (802.11ax)?",
-        options: ["Alcance", "2.4GHz só", "Eficiência (OFDMA)", "Segurança"],
-        correctOption: 2,
-        explanation: "Alta densidade."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Redes",
-        questionText: "Porta Tronco (Cisco)?",
-        options: ["access", "trunk", "vlan", "interface"],
-        correctOption: 1,
-        explanation: "switchport mode trunk."
-      },
-      {
-        subject: "Specialized IT Knowledge",
-        topic: "Redes",
-        questionText: "Default Gateway?",
-        options: ["DNS", "Roteador de saída", "Broadcast", "Máscara"],
-        correctOption: 1,
-        explanation: "Saída para internet."
       }
     ];
     
     for (const q of seedQuestions) {
       await storage.createQuestion(q);
     }
-    console.log("Banco de dados preenchido com as novas questões.");
+    console.log("Banco de dados preenchido com as novas questões da prova oficial.");
   }
 }
