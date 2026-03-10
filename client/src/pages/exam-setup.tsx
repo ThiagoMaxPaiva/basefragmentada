@@ -14,7 +14,7 @@ export default function ExamSetup() {
   const { data: subjects, isLoading: loadingSubjects } = useSubjects();
   
   const [subject, setSubject] = useState<string>("");
-  const { data: topics, isLoading: loadingTopics } = useTopics(subject);
+  const { data: topics, isLoading: loadingTopics } = useTopics(subject === "mixed" ? undefined : subject);
   
   const [topic, setTopic] = useState<string>("");
   const [mode, setMode] = useState<"training" | "mock_exam">("training");
@@ -23,7 +23,7 @@ export default function ExamSetup() {
   const handleStart = () => {
     if (!subject) return;
     const params = new URLSearchParams({ subject, mode, limit });
-    if (topic) params.append("topic", topic);
+    if (topic && subject !== "mixed") params.append("topic", topic);
     setLocation(`/exam?${params.toString()}`);
   };
 
@@ -63,6 +63,7 @@ export default function ExamSetup() {
                         <SelectValue placeholder={loadingSubjects ? "Carregando..." : "Selecionar Disciplina"} />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="mixed" className="font-medium font-bold text-primary">✦ Simulado Completo (Ambas)</SelectItem>
                         {subjects?.map(s => (
                           <SelectItem key={s} value={s} className="font-medium">{s === "Portuguese" ? "Português" : s === "Specialized IT Knowledge" ? "Conhecimentos Especializados de TI" : s}</SelectItem>
                         ))}
@@ -70,11 +71,11 @@ export default function ExamSetup() {
                     </Select>
                   </div>
 
-                  <div className={`space-y-3 transition-opacity duration-300 ${!subject ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
+                  <div className={`space-y-3 transition-opacity duration-300 ${!subject || subject === "mixed" ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
                     <Label className="text-xs uppercase tracking-widest font-bold text-muted-foreground flex items-center gap-2">
                       <Crosshair className="w-4 h-4" /> Área de Foco Secundária (Opcional)
                     </Label>
-                    <Select value={topic} onValueChange={setTopic} disabled={!subject}>
+                    <Select value={topic} onValueChange={setTopic} disabled={!subject || subject === "mixed"}>
                       <SelectTrigger className="h-12 border-border/80 focus:ring-primary/20 transition-all shadow-sm">
                         <SelectValue placeholder={loadingTopics ? "Carregando..." : "Todos os Tópicos"} />
                       </SelectTrigger>

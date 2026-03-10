@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { eq, and, desc } from "drizzle-orm";
+import { eq, and, or, desc } from "drizzle-orm";
 import {
   users, questions, progress, examHistory,
   type User, type InsertUser,
@@ -75,7 +75,17 @@ export class DatabaseStorage implements IStorage {
     let query = db.select().from(questions).$dynamic();
     
     const conditions = [];
-    if (subject) conditions.push(eq(questions.subject, subject));
+    
+    // Handle mixed subject (both Portuguese and Specialized IT Knowledge)
+    if (subject === "mixed") {
+      conditions.push(or(
+        eq(questions.subject, "Portuguese"),
+        eq(questions.subject, "Specialized IT Knowledge")
+      ));
+    } else if (subject) {
+      conditions.push(eq(questions.subject, subject));
+    }
+    
     if (topic) conditions.push(eq(questions.topic, topic));
     
     if (conditions.length > 0) {
