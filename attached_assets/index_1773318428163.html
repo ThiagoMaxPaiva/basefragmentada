@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAGS SIN - Missão Aprovação</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Arquivo de Estilos Externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="bg-slate-950 text-white p-4 sticky top-0 z-50 shadow-2xl border-b border-blue-900">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-700 p-2 rounded-lg shadow-inner ring-1 ring-blue-500 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-black text-xl tracking-tighter italic uppercase leading-none">EAGS <span class="text-blue-500">SIN</span></span>
+                    <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Base Fragmentada</span>
+                </div>
+            </div>
+            <div class="flex space-x-1 mt-4 md:mt-0 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
+                <button onclick="showTab('home')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 transition text-xs font-bold uppercase tracking-widest">Dashboard</button>
+                <button onclick="showTab('simulado')" class="nav-btn px-3 py-2 rounded-lg bg-blue-700 hover:bg-blue-600 transition text-xs font-bold uppercase tracking-widest shadow-lg">Simulado</button>
+                <button onclick="showTab('criar')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 transition text-xs font-bold uppercase tracking-widest">Adicionar</button>
+                <button onclick="showTab('mentor')" class="nav-btn px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition text-xs font-bold uppercase tracking-widest shadow-lg flex items-center gap-1 ring-1 ring-indigo-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                    Mentor IA
+                </button>
+                <button onclick="showTab('pomodoro')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-800 transition text-xs font-bold uppercase tracking-widest">Foco</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8 flex-grow w-full">
+
+        <!-- DASHBOARD -->
+        <div id="home" class="tab-content active space-y-8 animate-fade">
+            <header class="card-gradient p-8 md:p-12 rounded-3xl text-white shadow-2xl relative overflow-hidden border border-blue-900/50">
+                <div class="relative z-10">
+                    <h1 class="text-3xl md:text-5xl font-black mb-4 italic tracking-tight">CENTRO DE OPERAÇÕES</h1>
+                    <p class="text-blue-300 mb-10 uppercase tracking-widest text-xs md:text-sm font-bold border-l-4 border-blue-500 pl-4 italic">Sistema Local VS Code</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                        <div class="bg-slate-900/50 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                            <span class="block text-[10px] uppercase opacity-60 font-black mb-1 text-blue-400">Arsenal Total</span>
+                            <span id="total-questions-display" class="text-2xl md:text-3xl font-black text-white">0</span>
+                        </div>
+                        <div class="bg-slate-900/50 p-5 rounded-2xl border border-white/10 backdrop-blur-sm border-b-4 border-yellow-500">
+                            <span class="block text-[10px] uppercase opacity-60 font-black mb-1 text-yellow-400">Total Acertos</span>
+                            <span id="stats-total-hits" class="text-2xl md:text-3xl font-black text-white">0</span>
+                        </div>
+                        <div class="bg-slate-900/50 p-5 rounded-2xl border border-white/10 backdrop-blur-sm border-b-4 border-green-500">
+                            <span class="block text-[10px] uppercase opacity-60 font-black mb-1 text-green-400">Acertos Port.</span>
+                            <span id="stats-port" class="text-2xl md:text-3xl font-black">0</span>
+                        </div>
+                        <div class="bg-slate-900/50 p-5 rounded-2xl border border-white/10 backdrop-blur-sm border-b-4 border-blue-500">
+                            <span class="block text-[10px] uppercase opacity-60 font-black mb-1 text-blue-400">Acertos Info.</span>
+                            <span id="stats-sin" class="text-2xl md:text-3xl font-black">0</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-red-600"></div>
+                    <h2 class="text-lg font-black mb-6 flex items-center text-red-700 uppercase italic tracking-wider">Análise de Falhas</h2>
+                    <div class="flex items-center justify-between bg-red-50 p-6 rounded-2xl border border-red-100">
+                        <div><p class="text-[10px] font-black text-red-800 uppercase tracking-widest mb-1">Erros Acumulados</p><p class="text-5xl font-black text-red-600 leading-none" id="stats-errors">0</p></div>
+                        <div class="text-red-200"><svg class="h-14 w-14" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/></svg></div>
+                    </div>
+                </div>
+                <div class="md:col-span-2 bg-slate-900 p-8 rounded-3xl text-white shadow-2xl relative">
+                   <div class="absolute top-0 left-0 w-full h-2 bg-indigo-500"></div>
+                   <h2 class="text-lg font-black mb-4 text-indigo-400 italic uppercase underline decoration-2 underline-offset-8 tracking-wider flex items-center gap-2">
+                       Estrutura Fragmentada (VS Code)
+                   </h2>
+                   <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                       Este projeto foi dividido em 4 arquivos essenciais: <code class="text-indigo-300">index.html</code>, <code class="text-indigo-300">style.css</code>, <code class="text-indigo-300">script.js</code> e <code class="text-indigo-300">ai_mentor.js</code>. 
+                   </p>
+                   <ul class="text-xs space-y-2 text-slate-400 font-medium">
+                       <li><span class="text-indigo-400 mr-2">➤</span> O limite de expansão agora depende apenas da sua máquina local.</li>
+                       <li><span class="text-indigo-400 mr-2">➤</span> As 500 questões (Estáticas + Gerador) foram carregadas com sucesso.</li>
+                   </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENTOR IA -->
+        <div id="mentor" class="tab-content animate-fade">
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[600px]">
+                <div class="bg-indigo-900 p-4 border-b border-indigo-800 flex items-center gap-4">
+                    <div class="bg-indigo-700 p-3 rounded-full shadow-inner ring-2 ring-indigo-400">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-black text-lg uppercase italic tracking-wider">Sargento IA</h3>
+                        <p class="text-indigo-200 text-[10px] uppercase tracking-widest font-bold">Especialista EAGS SIN</p>
+                    </div>
+                </div>
+
+                <div id="chat-box" class="chat-container p-6 bg-slate-50 flex flex-col gap-4 flex-grow">
+                    <div class="msg-ai p-4 max-w-[85%] shadow-md text-sm leading-relaxed font-medium">
+                        Permissão para falar, Sargento! Arquivo de Inteligência Artificial carregado separadamente. Estou pronto para tirar dúvidas técnicas sobre Redes, Hardware, Linux ou Gramática. Qual a missão?
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 border-t border-slate-200">
+                    <form id="chat-form" class="flex gap-2" onsubmit="handleChatSubmit(event)">
+                        <input type="text" id="chat-input" class="flex-grow p-4 rounded-xl border border-slate-300 bg-slate-50 focus:border-indigo-500 focus:bg-white transition text-sm" placeholder="Pergunte aqui..." required autocomplete="off">
+                        <button type="submit" id="btn-send" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg transition disabled:opacity-50 flex items-center justify-center">
+                            Enviar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIMULADO -->
+        <div id="simulado" class="tab-content animate-fade">
+            <div id="quiz-results" class="hidden bg-white p-10 rounded-3xl shadow-2xl border-t-8 border-blue-600 text-center space-y-8 max-w-4xl mx-auto">
+                <h2 class="text-4xl font-black text-slate-900 italic uppercase tracking-tight">Ciclo Concluído</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-green-50 rounded-2xl border-2 border-green-100"><p class="text-xs font-black text-green-700 uppercase">Acertos</p><p id="final-hits" class="text-5xl font-black text-green-600">0</p></div>
+                    <div class="p-6 bg-red-50 rounded-2xl border-2 border-red-100"><p class="text-xs font-black text-red-700 uppercase">Erros</p><p id="final-misses" class="text-5xl font-black text-red-600">0</p></div>
+                    <div class="p-6 bg-blue-50 rounded-2xl border-2 border-blue-100"><p class="text-xs font-black text-blue-700 uppercase">Eficiência</p><p id="final-perc" class="text-5xl font-black text-blue-600">0%</p></div>
+                </div>
+                <div class="flex justify-center gap-4">
+                    <button onclick="startReviewMode()" id="btn-review" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest transition">Revisar Erros</button>
+                    <button onclick="resetCycle()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest transition">Novo Ciclo</button>
+                </div>
+            </div>
+
+            <div id="quiz-main" class="bg-white p-6 md:p-12 rounded-3xl shadow-2xl border border-slate-200 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-slate-900"></div>
+                <div class="flex flex-wrap justify-between items-center mb-10 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <span id="quiz-mode-label" class="text-[10px] font-black px-3 py-1 bg-slate-950 text-white rounded-full uppercase italic tracking-widest">Normal</span>
+                        <span id="quiz-category" class="px-4 py-1 bg-blue-100 text-blue-800 text-[10px] font-black rounded-full uppercase border border-blue-200 tracking-widest">Informática</span>
+                    </div>
+                    <div class="text-right flex-1 md:flex-none">
+                        <div class="flex justify-between md:justify-end mb-2"><span id="quiz-counter" class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Questão 1</span></div>
+                        <div class="w-full md:w-48 h-2 bg-slate-100 rounded-full overflow-hidden"><div id="progress-bar-fill" class="h-full bg-blue-600 transition-all duration-500" style="width: 1%"></div></div>
+                    </div>
+                </div>
+                <div class="min-h-[120px]">
+                    <h2 id="quiz-question" class="text-xl md:text-2xl font-bold mb-8 text-slate-800 leading-snug">Carregando...</h2>
+                </div>
+                <div id="quiz-options" class="grid grid-cols-1 gap-4 mb-10"></div>
+                <div id="explanation-box" class="hidden p-6 rounded-2xl border-l-4 border-slate-900 bg-slate-50 mb-6">
+                    <h4 id="explanation-title" class="font-black text-sm uppercase mb-2">Análise Tática</h4>
+                    <p id="explanation-text" class="text-sm text-slate-700 leading-relaxed"></p>
+                </div>
+                <div class="flex justify-end"><button id="btn-next" onclick="nextQuestion()" class="hidden bg-slate-950 text-white px-8 py-3 rounded-lg hover:bg-slate-800 transition font-bold uppercase text-xs tracking-widest">Próxima</button></div>
+            </div>
+        </div>
+
+        <!-- ABA CRIAR QUESTÃO -->
+        <div id="criar" class="tab-content animate-fade">
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+                <h2 class="text-2xl font-black text-slate-900 mb-6 border-b pb-4">Alimentar Banco de Dados Local</h2>
+                <form id="form-create" onsubmit="saveUserQuestion(event)" class="space-y-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Disciplina</label>
+                            <select id="new-cat" class="w-full p-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-slate-50 outline-none text-sm font-bold">
+                                <option value="Especialidade">Informática (SIN)</option>
+                                <option value="Português">Língua Portuguesa</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Gabarito</label>
+                            <select id="new-correct" class="w-full p-3 rounded-lg border border-slate-300 focus:border-green-500 focus:ring-1 focus:ring-green-500 bg-slate-50 outline-none text-sm font-bold">
+                                <option value="0">Alternativa A</option>
+                                <option value="1">Alternativa B</option>
+                                <option value="2">Alternativa C</option>
+                                <option value="3">Alternativa D</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Enunciado</label>
+                        <textarea id="new-q" rows="3" class="w-full p-3 rounded-lg border border-slate-300 focus:border-blue-500 outline-none text-sm" placeholder="Digite a pergunta..." required></textarea>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold uppercase text-slate-500">Alternativas</label>
+                        <div class="flex items-center"><span class="w-8 font-bold text-slate-400">A)</span><input type="text" id="new-opt0" class="flex-1 p-2 border rounded-lg text-sm" required></div>
+                        <div class="flex items-center"><span class="w-8 font-bold text-slate-400">B)</span><input type="text" id="new-opt1" class="flex-1 p-2 border rounded-lg text-sm" required></div>
+                        <div class="flex items-center"><span class="w-8 font-bold text-slate-400">C)</span><input type="text" id="new-opt2" class="flex-1 p-2 border rounded-lg text-sm" required></div>
+                        <div class="flex items-center"><span class="w-8 font-bold text-slate-400">D)</span><input type="text" id="new-opt3" class="flex-1 p-2 border rounded-lg text-sm" required></div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Explicação Tática</label>
+                        <textarea id="new-exp" rows="2" class="w-full p-3 rounded-lg border border-slate-300 focus:border-blue-500 outline-none text-sm" placeholder="Explique a resposta correta..." required></textarea>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-bold uppercase text-xs tracking-widest shadow-lg transition">Salvar Questão</button>
+                    </div>
+                    <div id="save-msg" class="hidden text-center p-3 bg-green-100 text-green-700 rounded-lg text-sm font-bold">Salva com sucesso!</div>
+                </form>
+            </div>
+        </div>
+
+        <!-- POMODORO -->
+        <div id="pomodoro" class="tab-content animate-fade text-center py-12">
+            <div class="max-w-md mx-auto bg-white p-12 rounded-full border-[12px] border-slate-950 shadow-2xl flex flex-col justify-center items-center">
+                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-6">Modo Foco</h3>
+                <div id="timer-display" class="text-7xl font-black mb-10 text-slate-950 tabular-nums">25:00</div>
+                <div class="flex space-x-4">
+                    <button id="timer-toggle" class="bg-blue-700 text-white px-8 py-4 rounded-xl font-bold uppercase text-xs">Iniciar</button>
+                    <button id="timer-reset" class="bg-slate-100 text-slate-600 px-6 py-4 rounded-xl font-bold uppercase text-xs">Reset</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Importação dos Scripts Externos -->
+    <script src="script.js"></script>
+    <script src="ai_mentor.js"></script>
+</body>
+</html>
