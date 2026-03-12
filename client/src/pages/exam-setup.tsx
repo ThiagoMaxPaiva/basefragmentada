@@ -36,7 +36,7 @@ export default function ExamSetup() {
           className="space-y-6"
         >
           {/* Page Header */}
-          <div className="card-gradient p-8 rounded-2xl text-white shadow-2xl relative overflow-hidden border border-blue-900/40">
+          <div className="p-8 rounded-2xl text-white shadow-2xl relative overflow-hidden border border-border" style={{ background: "var(--card-gradient)" }}>
             <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
             <div className="relative z-10">
               <p className="text-blue-400 text-[10px] uppercase tracking-widest font-black mb-2 border-l-4 border-blue-500 pl-3 italic">

@@ -9,7 +9,7 @@
     --font-sans: 'Inter', sans-serif;
     --font-display: 'Rajdhani', sans-serif;
 
-    /* Always dark — FAB Navy theme */
+    /* Default: Navy FAB theme */
     --background: 222 47% 6%;
     --foreground: 210 40% 96%;
 
@@ -42,7 +42,7 @@
 
     --radius: 0.5rem;
 
-    /* Sidebar Variables */
+    /* Sidebar */
     --sidebar-background: 222 47% 5%;
     --sidebar-foreground: 210 40% 96%;
     --sidebar-primary: 217 91% 60%;
@@ -60,6 +60,9 @@
     --chart-3: 217 61% 45%;
     --chart-4: 142 71% 45%;
     --chart-5: 38 92% 50%;
+
+    /* Theme gradient used in hero headers */
+    --card-gradient: linear-gradient(135deg, #020d1a 0%, #0f2c6e 60%, #1a4db5 100%);
   }
 }
 
@@ -77,9 +80,9 @@
   }
 }
 
-/* Military gradient header */
+/* Dynamic themed gradient used in hero/header cards */
 .card-gradient {
-  background: linear-gradient(135deg, #020d1a 0%, #0f2c6e 60%, #1a4db5 100%);
+  background: var(--card-gradient);
 }
 
 /* Scrollbar */

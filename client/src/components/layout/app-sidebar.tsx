@@ -1,4 +1,4 @@
-import { BookOpen, Crosshair, History, Home, LogOut, Shield } from "lucide-react";
+import { BookOpen, Crosshair, History, Home, LogOut, Palette, Settings, Shield } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -14,11 +14,13 @@ import {
 } from "@/components/ui/sidebar";
 import { useLocation } from "wouter";
 import { useLogout, useUser } from "@/hooks/use-auth";
+import { useThemeContext } from "@/components/theme-provider";
 
 export function AppSidebar() {
   const [location, setLocation] = useLocation();
   const { mutate: logout } = useLogout();
   const { data: user } = useUser();
+  const { currentTheme } = useThemeContext();
 
   const mainNav = [
     { title: "Centro de Comando", url: "/dashboard", icon: Home },
@@ -46,7 +48,7 @@ export function AppSidebar() {
           </div>
           <div className="flex flex-col flex-1 truncate">
             <span className="font-black text-base italic leading-tight tracking-tight truncate uppercase">
-              EAGS <span className="text-blue-400">SIN</span>
+              EAGS <span className="text-primary">SIN</span>
             </span>
             <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-bold">Base Fragmentada</span>
           </div>
@@ -101,6 +103,38 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-[9px] font-black tracking-widest uppercase text-muted-foreground/60">Sistema</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={location === "/settings"}
+                  onClick={() => setLocation("/settings")}
+                  className="cursor-pointer font-bold tracking-wide"
+                  data-testid="nav-settings"
+                >
+                  <span>
+                    <Palette className="w-4 h-4" />
+                    <span className="flex-1">Temas</span>
+                    <span
+                      className="text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider opacity-80"
+                      style={{
+                        background: currentTheme.preview,
+                        color: "#fff",
+                        textShadow: "0 1px 2px rgba(0,0,0,.5)",
+                      }}
+                    >
+                      {currentTheme.name.split(" ")[0]}
+                    </span>
+                  </span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter className="p-3">
@@ -108,7 +142,7 @@ export function AppSidebar() {
           <div className="flex flex-col gap-1 mb-3 px-1">
             <div className="text-[9px] font-black text-muted-foreground/60 uppercase tracking-widest">Identificado Como</div>
             <div className="flex flex-col bg-muted/30 px-3 py-2 rounded-lg border border-border">
-              <span className="text-xs font-black text-blue-400 uppercase tracking-wide">{patentLabel}</span>
+              <span className="text-xs font-black text-primary uppercase tracking-wide">{patentLabel}</span>
               <span className="text-sm font-semibold truncate text-foreground">{user.name}</span>
             </div>
           </div>
@@ -118,6 +152,7 @@ export function AppSidebar() {
             <SidebarMenuButton
               onClick={() => logout()}
               className="text-destructive hover:text-destructive hover:bg-destructive/10 transition-colors font-black uppercase tracking-widest text-xs"
+              data-testid="button-logout"
             >
               <LogOut className="w-4 h-4" />
               <span>DESCONECTAR</span>

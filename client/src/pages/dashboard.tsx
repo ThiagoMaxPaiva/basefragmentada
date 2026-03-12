@@ -36,7 +36,7 @@ export default function Dashboard() {
       <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
 
         {/* Hero Banner */}
-        <div className="card-gradient p-8 md:p-12 rounded-2xl text-white shadow-2xl relative overflow-hidden border border-blue-900/40">
+        <div className="p-8 md:p-12 rounded-2xl text-white shadow-2xl relative overflow-hidden border border-border" style={{ background: "var(--card-gradient)" }}>
           <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
           <div className="relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
