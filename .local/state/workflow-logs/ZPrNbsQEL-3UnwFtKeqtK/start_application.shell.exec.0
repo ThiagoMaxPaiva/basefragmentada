@@ -1,0 +1,12 @@
+[1G[0K⠙[1G[0K
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0K⠙[1G[0KSistema de questões pronto.
+2:15:04 PM [express] serving on port 5000
+2:15:08 PM [express] GET /api/auth/me 401 in 3ms :: {"message":"Não autorizado"}
+2:15:14 PM [express] POST /api/auth/login 200 in 29ms :: {"id":1,"email":"teste@aero.mil","name":"Teste","patent":"Student","createdAt":"2026-03-04T12:04:05.669Z"}
+2:15:14 PM [express] GET /api/progress 200 in 9ms :: {"id":37,"userId":1,"totalQuestions":111,"correctAnswers":89,"wrongAnswers":22,"lastUpdated":"2026-03-13T19:01:19.681Z"}
+2:15:14 PM [express] GET /api/exams/history 200 in 16ms :: [{"id":44,"userId":1,"mode":"training","score":41,"totalQuestions":50,"completedAt":"2026-03-13T19:01:20.018Z"},{"id":43,"userId":1,"mode":"training","score":15,"totalQuestions":21,"completedAt":"2026-03-13T18:34:32.341Z"},{"id":42,"userId":1,"mode":"training","score":9,"totalQuestions":10,"completedAt":"2026-03-12T12:36:27.381Z"},{"id":41,"userId":1,"mode":"training","score":16,"totalQuestions":20,"completedAt":"2026-03-06T14:25:22.921Z"},{"id":40,"userId":1,"mode":"training","score":8,"totalQuestions":10,"completedAt":"2026-03-06T14:18:08.763Z"}]
+2:15:33 PM [express] GET /api/questions/subjects 200 in 57ms :: ["Specialized IT Knowledge","Portuguese"]
+2:15:38 PM [express] GET /api/questions/topics 200 in 4ms :: ["Geral","Segurança","AD","Malware","Prog","VPN","SQL","Windows","Linux","CSS","NTFS","Redes de Computadores","WAN","HTML","Sistemas Operacionais","DNS"]

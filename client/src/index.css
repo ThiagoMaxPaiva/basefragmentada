@@ -118,4 +118,15 @@
   .active-elevate-2:active::after {
     background-color: var(--elevate-2);
   }
+  
+  /* 3D Utilities for Flashcards */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
 }

@@ -1,0 +1,17 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KSistema de questões pronto.
+11:07:59 AM [express] serving on port 5000
+11:08:05 AM [express] GET /api/auth/me 401 in 2ms :: {"message":"Não autorizado"}
+12:38:53 PM [express] GET /api/auth/me 401 in 1ms :: {"message":"Não autorizado"}
+12:39:30 PM [express] POST /api/auth/login 401 in 423ms
+12:39:32 PM [express] POST /api/auth/login 401 in 2ms
+12:39:37 PM [express] POST /api/auth/login 401 in 6ms
+12:39:41 PM [express] POST /api/auth/login 401 in 5ms
+12:39:50 PM [express] POST /api/auth/login 401 in 2ms
+12:39:52 PM [express] POST /api/auth/login 401 in 2ms
+12:39:58 PM [express] POST /api/auth/login 200 in 4ms :: {"id":1,"email":"teste@aero.mil","name":"Teste","patent":"Student","createdAt":"2026-03-04T12:04:05.669Z"}
+12:39:58 PM [express] GET /api/progress 304 in 14ms :: {"id":37,"userId":1,"totalQuestions":111,"correctAnswers":89,"wrongAnswers":22,"lastUpdated":"2026-03-13T19:01:19.681Z"}
+12:39:58 PM [express] GET /api/exams/history 304 in 24ms :: [{"id":44,"userId":1,"mode":"training","score":41,"totalQuestions":50,"completedAt":"2026-03-13T19:01:20.018Z"},{"id":43,"userId":1,"mode":"training","score":15,"totalQuestions":21,"completedAt":"2026-03-13T18:34:32.341Z"},{"id":42,"userId":1,"mode":"training","score":9,"totalQuestions":10,"completedAt":"2026-03-12T12:36:27.381Z"},{"id":41,"userId":1,"mode":"training","score":16,"totalQuestions":20,"completedAt":"2026-03-06T14:25:22.921Z"},{"id":40,"userId":1,"mode":"training","score":8,"totalQuestions":10,"completedAt":"2026-03-06T14:18:08.763Z"}]

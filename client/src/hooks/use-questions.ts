@@ -43,3 +43,19 @@ export function useTopics(subject?: string) {
     enabled: !!subject,
   });
 }
+
+interface QuestionStats {
+  total: number;
+  bySubject: Record<string, number>;
+}
+
+export function useQuestionStats() {
+  return useQuery<QuestionStats>({
+    queryKey: ["/api/questions/stats"],
+    queryFn: async () => {
+      const res = await fetch("/api/questions/stats", { credentials: "include" });
+      if (!res.ok) throw new Error("Falha ao buscar as estatísticas das questões");
+      return res.json();
+    },
+  });
+}

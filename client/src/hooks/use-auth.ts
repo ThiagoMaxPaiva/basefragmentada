@@ -105,3 +105,32 @@ export function useLogout() {
     },
   });
 }
+
+export function useUpdateProfile() {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (data: { name?: string; currentPassword?: string; newPassword?: string }) => {
+      const res = await fetch("/api/auth/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+      
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || "Falha ao atualizar perfil");
+      }
+      return await res.json();
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData([api.auth.me.path], data);
+      toast({ title: "Perfil atualizado", description: "Suas informações foram salvas com sucesso." });
+    },
+    onError: (error: Error) => {
+      toast({ title: "Falha na atualização", description: error.message, variant: "destructive" });
+    }
+  });
+}

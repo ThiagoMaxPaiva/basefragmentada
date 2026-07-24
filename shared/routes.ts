@@ -6,7 +6,9 @@ import {
   progress,
   examHistory,
   loginSchema,
-  registerSchema
+  registerSchema,
+  flashcards,
+  insertFlashcardSchema
 } from './schema';
 
 export const errorSchemas = {
@@ -39,6 +41,10 @@ const ProgressResponseSchema = z.object({
   totalQuestions: z.number(),
   correctAnswers: z.number(),
   wrongAnswers: z.number(),
+  xp: z.number(),
+  currentStreak: z.number().optional(),
+  longestStreak: z.number().optional(),
+  lastActivityDate: z.string().nullable().optional(),
   lastUpdated: z.string().nullable().optional(),
 });
 
@@ -138,7 +144,13 @@ export const api = {
             correct: z.boolean(),
             correctOption: z.number(),
             explanation: z.string(),
-          }))
+          })),
+          rankInfo: z.object({
+            previousPatent: z.string(),
+            newPatent: z.string(),
+            rankedUp: z.boolean(),
+            totalCorrect: z.number(),
+          }).optional()
         }),
         401: errorSchemas.unauthorized,
       }
@@ -176,6 +188,43 @@ export const api = {
         }),
         401: errorSchemas.unauthorized,
         404: errorSchemas.notFound,
+      }
+    }
+  },
+  flashcards: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/flashcards' as const,
+      responses: {
+        200: z.array(z.custom<typeof flashcards.$inferSelect>()),
+        401: errorSchemas.unauthorized,
+      }
+    },
+    create: {
+      method: 'POST' as const,
+      path: '/api/flashcards' as const,
+      input: z.object({
+        front: z.string(),
+        back: z.string(),
+        category: z.string(),
+      }),
+      responses: {
+        201: z.custom<typeof flashcards.$inferSelect>(),
+        401: errorSchemas.unauthorized,
+        400: errorSchemas.validation,
+      }
+    },
+    review: {
+      method: 'POST' as const,
+      path: '/api/flashcards/:id/review' as const,
+      input: z.object({
+        score: z.number().min(0).max(5), // SM-2 score: 0 to 5
+      }),
+      responses: {
+        200: z.custom<typeof flashcards.$inferSelect>(),
+        401: errorSchemas.unauthorized,
+        404: errorSchemas.notFound,
+        400: errorSchemas.validation,
       }
     }
   }

@@ -1,4 +1,5 @@
-import { BookOpen, Crosshair, History, Home, LogOut, Palette, Settings, Shield } from "lucide-react";
+import { BookOpen, BookX, Crosshair, History, Home, LogOut, Palette, Settings, Shield, Brain, Database, BrainCircuit } from "lucide-react";
+import { PomodoroWidget } from "@/components/layout/pomodoro-widget";
 import {
   Sidebar,
   SidebarContent,
@@ -15,6 +16,7 @@ import {
 import { useLocation } from "wouter";
 import { useLogout, useUser } from "@/hooks/use-auth";
 import { useThemeContext } from "@/components/theme-provider";
+import { RANKS } from "@shared/schema";
 
 export function AppSidebar() {
   const [location, setLocation] = useLocation();
@@ -24,20 +26,18 @@ export function AppSidebar() {
 
   const mainNav = [
     { title: "Centro de Comando", url: "/dashboard", icon: Home },
+    { title: "Relatório de Inteligência", url: "/intelligence", icon: BrainCircuit },
     { title: "Iniciar Treinamento", url: "/setup", icon: Crosshair },
+    { title: "Revisão Tática", url: "/flashcards", icon: Brain },
   ];
 
   const subNav = [
     { title: "Registro de Serviço", url: "/history", icon: History },
-    { title: "Manuais", url: "#", icon: BookOpen },
+    { title: "Banco de Questões", url: "/arsenal", icon: Database },
+    { title: "Caderno de Erros", url: "/wrong-answers", icon: BookX },
   ];
 
-  const patentLabel =
-    user?.patent === "Civilian" ? "Civil" :
-    user?.patent === "Recruit" ? "Recruta" :
-    user?.patent === "Student" ? "Aluno" :
-    user?.patent === "Third Sergeant" ? "Terceiro-Sargento" :
-    user?.patent ?? "";
+  const patentLabel = RANKS.find(r => r.id === user?.patent)?.name || "Civil";
 
   return (
     <Sidebar variant="inset" collapsible="icon">
@@ -135,6 +135,8 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <PomodoroWidget />
       </SidebarContent>
 
       <SidebarFooter className="p-3">
