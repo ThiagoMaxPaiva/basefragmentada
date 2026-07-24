@@ -9,6 +9,7 @@
     "start": "node dist/index.cjs",
     "check": "tsc",
     "db:push": "drizzle-kit push",
+    "db:setup": "drizzle-kit push && tsx script/seed-eags-2022.ts && tsx script/seed-eags-2024.ts && tsx script/seed-eags-2024-p2.ts && tsx script/seed-eags-2024-p3.ts && tsx script/seed-eags-2024-pt-p1.ts && tsx script/seed-eags-2024-pt-p2.ts && tsx script/seed-eags-bloco2.ts && tsx script/seed-eags-historico.ts && tsx script/seed-eags-sin.ts",
     "seed-eags": "tsx --env-file=.env script/seed-eags-2022.ts"
   },
   "dependencies": {
